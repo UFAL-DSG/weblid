@@ -10,6 +10,7 @@ from flask.ext.socketio import SocketIO, emit, session
 from datetime import datetime
 
 app = Flask(__name__)
+app.debug = True
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '12345'
 socketio = SocketIO(app)
@@ -32,27 +33,46 @@ def get_file_name():
 def index():
     return render_template('index.html')
 
+@app.route('/feedback/<sessionname>/<feedback>/<language>', methods=['GET', 'POST'])
+def feedback(sessionname, feedback, language):
+    print "Feedback", sessionname, feedback, language
+    print sessionname+".feedback"
+    with open("./data/"+sessionname+".feedback", "w") as f:
+        f.write(feedback)
+        f.write("\n")
+        f.write(language)
+        f.write("\n")
+
+    return "received"
 
 @socketio.on('start')
 def start(message):
     print "Start", message
 
-    session['file_name'] = get_file_name()
-    session['wav'] = wave.open(session['file_name'], 'wb')
-    session['wav'].setparams((1, 2, message['sample_rate'], 0, 'NONE', 'not compressed'))
+    if message['sample_rate']:
+        session['file_name'] = get_file_name()
+        session['wav'] = wave.open(session['file_name'], 'wb')
+        session['wav'].setparams((1, 2, message['sample_rate'], 0, 'NONE', 'not compressed'))
+
+        emit('sessionname', {'sessionname': os.path.basename(session['file_name'])})
 
     print "Opening file:", session['file_name']
 
 @socketio.on('chunk')
 def chunk(message):
     print "Chunk", message.keys()
-    #packed_chunk = struct.pack('b', message['chunk'])
-    session['wav'].writeframes(''.join([struct.pack('h', v) for v in message['chunk']]))
+
+    if session['file_name']:
+        session['wav'].writeframes(''.join([struct.pack('h', v) for v in message['chunk']]))
+
+        emit('result', {'language': 'Silence'})
 
 @socketio.on('stop')
-def end_recognition(message):
+def stop(message):
     print "Stop", message
-    session['wav'].close()
+
+    if session['file_name']:
+        session['wav'].close()
 
 if __name__ == '__main__':
     socketio.run(app, host = '0.0.0.0')

@@ -8,6 +8,7 @@
 
         var bufferCallback = config.bufferCallback || function(buffer) { console.log(buffer); };
         var recording = false;
+        var sessionname = "none"
 
         this.init = function() {
             audio_context = createAudioContext();
@@ -33,7 +34,20 @@
         }
 
         this.sample_rate = function(){
-            return sampleRate;
+            if (sampleRate >= 22050) {
+                return sampleRate / 2;
+            }
+            else {
+                return sampleRate;
+            }
+        }
+
+        this.sessionname = function(sn){
+            sessionname = sn;
+        }
+
+        this.sessionname_get = function(){
+            return sessionname;
         }
 
         function createAudioContext() {
@@ -60,12 +74,20 @@
 
             node.onaudioprocess = function(e){
                 if (!recording) return;
-                var buffer = [];
-                for (var channel = 0; channel < numChannels; channel++){
-                        buffer.push(e.inputBuffer.getChannelData(channel));
+                var buffer = e.inputBuffer.getChannelData(0);
+
+                var buffer_down = []
+                if (sampleRate >= 22050) {
+                    for (var i = 0; i < buffer.length - 1; i = i + 2) {
+                        m = (buffer[i] + buffer[i+1]) / 2.0;
+                        buffer_down.push(m);
+                    }
+                }
+                else {
+                    buffer_down = buffer
                 }
 
-                bufferCallback(buffer);
+                bufferCallback(buffer_down);
             }
 
             input.connect(node);
