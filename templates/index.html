@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html>
 <head>
-	<title>Language Identification</title>
+	<title>Sound and Language Identification</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,19 +18,36 @@
 
 <body>
 
-<div data-role="page">
-	<div data-role="header">
-		<h1>Language Identification</h1>
+<div id="mainpage" data-role="page">
+    <div id="menupanel" data-role="panel" data-display="overlay">
+        <ul data-role="listview">
+            <!--<li><a id="points" href="#mainpage" class="ui-btn">Your points</a></li>-->
+            <li><a id="help" href="#helppage" class="ui-btn">Help</a></li>
+            <li><a id="about" href="#aboutpage" class="ui-btn">About</a></li>
+            <li><a data-rel="close" class="ui-btn">Close panel</a></li>
+        </ul>
+    </div><!-- /panel -->
+
+    <div data-role="header">
+        <a id="menu" href="#menupanel" class="ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all">Menu</a>
+
+        <h1>Sound and Language Identification</h1>
+
 	</div><!-- /header -->
 
-
 	<div id="main" data-role="main" class="ui-content">
+
+        <div id="warning" class="ui-bar ui-bar-a ui-icon-delete ui-btn-icon-left ui-corner-all ui-warning">
+            <p id="warning-content" class="">Warning</p>
+        </div>
+
+
         <div>
             <button id="push" class="show-page-loading-msg" data-theme="b" data-textonly="false" data-textvisible="true" data-msgtext="Recording audio" data-inline="true">Push to speak</button>
             <button id="stop" class="hide-page-loading-msg" data-theme="a" data-inline="true" data-icon="delete">Stop</button>
         </div>
 
-        <h3 class="ui-bar ui-bar-a ui-corner-all">Detected language</h3>
+        <h3 class="ui-bar ui-bar-a ui-corner-all">Detected sound or language</h3>
         <div class="ui-body ui-body-a ui-corner-all">
             <p id="language">None</p>
         </div>
@@ -41,6 +58,209 @@
             <button id="no" data-theme="a">No</button>
         </div>
 
+        <div id="whatsound">
+            <h3 class="ui-bar ui-bar-a ui-corner-all">What sound or language was it?</h3>
+            <div >
+                <form class="ui-filterable">
+                    <input id="soundtype" data-type="search" placeholder="Search sounds and languages ...">
+                </form>
+                <ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-input="#soundtype">
+                    <li><a id="slselection" href="#">Silence</a></li>
+                    <li><a id="slselection" href="#">Noise</a></li>
+                    <li><a id="slselection" href="#">Car</a></li>
+                    <li><a id="slselection" href="#">Bus</a></li>
+                    <li><a id="slselection" href="#">Train</a></li>
+                    <li><a id="slselection" href="#">Music</a></li>
+                    <li><a id="slselection" href="#">Water</a></li>
+
+                    <li><a id="slselection" href="#">	Afar	</a></li>
+                    <li><a id="slselection" href="#">	Afrikaans	</a></li>
+                    <li><a id="slselection" href="#">	Akan	</a></li>
+                    <li><a id="slselection" href="#">	Albanian	</a></li>
+                    <li><a id="slselection" href="#">	Amharic	</a></li>
+                    <li><a id="slselection" href="#">	Arabic	</a></li>
+                    <li><a id="slselection" href="#">	Aragonese	</a></li>
+                    <li><a id="slselection" href="#">	Armenian	</a></li>
+                    <li><a id="slselection" href="#">	Assamese	</a></li>
+                    <li><a id="slselection" href="#">	Avaric	</a></li>
+                    <li><a id="slselection" href="#">	Avestan	</a></li>
+                    <li><a id="slselection" href="#">	Aymara	</a></li>
+                    <li><a id="slselection" href="#">	Azerbaijani	</a></li>
+                    <li><a id="slselection" href="#">	Bambara	</a></li>
+                    <li><a id="slselection" href="#">	Bashkir	</a></li>
+                    <li><a id="slselection" href="#">	Basque	</a></li>
+                    <li><a id="slselection" href="#">	Belarusian	</a></li>
+                    <li><a id="slselection" href="#">	Bengali, Bangla	</a></li>
+                    <li><a id="slselection" href="#">	Bihari	</a></li>
+                    <li><a id="slselection" href="#">	Bislama	</a></li>
+                    <li><a id="slselection" href="#">	Bosnian	</a></li>
+                    <li><a id="slselection" href="#">	Breton	</a></li>
+                    <li><a id="slselection" href="#">	Bulgarian	</a></li>
+                    <li><a id="slselection" href="#">	Burmese	</a></li>
+                    <li><a id="slselection" href="#">	Catalan, Valencian	</a></li>
+                    <li><a id="slselection" href="#">	Chamorro	</a></li>
+                    <li><a id="slselection" href="#">	Chechen	</a></li>
+                    <li><a id="slselection" href="#">	Chichewa, Chewa, Nyanja	</a></li>
+                    <li><a id="slselection" href="#">	Chinese	</a></li>
+                    <li><a id="slselection" href="#">	Chuvash	</a></li>
+                    <li><a id="slselection" href="#">	Cornish	</a></li>
+                    <li><a id="slselection" href="#">	Corsican	</a></li>
+                    <li><a id="slselection" href="#">	Cree	</a></li>
+                    <li><a id="slselection" href="#">	Croatian	</a></li>
+                    <li><a id="slselection" href="#">	Czech	</a></li>
+                    <li><a id="slselection" href="#">	Danish	</a></li>
+                    <li><a id="slselection" href="#">	Divehi, Dhivehi, Maldivian	</a></li>
+                    <li><a id="slselection" href="#">	Dutch	</a></li>
+                    <li><a id="slselection" href="#">	Dzongkha	</a></li>
+                    <li><a id="slselection" href="#">	English	</a></li>
+                    <li><a id="slselection" href="#">	Esperanto	</a></li>
+                    <li><a id="slselection" href="#">	Estonian	</a></li>
+                    <li><a id="slselection" href="#">	Ewe	</a></li>
+                    <li><a id="slselection" href="#">	Faroese	</a></li>
+                    <li><a id="slselection" href="#">	Fijian	</a></li>
+                    <li><a id="slselection" href="#">	Finnish	</a></li>
+                    <li><a id="slselection" href="#">	French	</a></li>
+                    <li><a id="slselection" href="#">	Fula, Fulah, Pulaar, Pular	</a></li>
+                    <li><a id="slselection" href="#">	Galician	</a></li>
+                    <li><a id="slselection" href="#">	Georgian	</a></li>
+                    <li><a id="slselection" href="#">	German	</a></li>
+                    <li><a id="slselection" href="#">	Greek (modern)	</a></li>
+                    <li><a id="slselection" href="#">	Guaraní	</a></li>
+                    <li><a id="slselection" href="#">	Gujarati	</a></li>
+                    <li><a id="slselection" href="#">	Haitian, Haitian Creole	</a></li>
+                    <li><a id="slselection" href="#">	Hausa	</a></li>
+                    <li><a id="slselection" href="#">	Hebrew (modern)	</a></li>
+                    <li><a id="slselection" href="#">	Herero	</a></li>
+                    <li><a id="slselection" href="#">	Hindi	</a></li>
+                    <li><a id="slselection" href="#">	Hiri Motu	</a></li>
+                    <li><a id="slselection" href="#">	Hungarian	</a></li>
+                    <li><a id="slselection" href="#">	Interlingua	</a></li>
+                    <li><a id="slselection" href="#">	Indonesian	</a></li>
+                    <li><a id="slselection" href="#">	Interlingue	</a></li>
+                    <li><a id="slselection" href="#">	Irish	</a></li>
+                    <li><a id="slselection" href="#">	Igbo	</a></li>
+                    <li><a id="slselection" href="#">	Inupiaq	</a></li>
+                    <li><a id="slselection" href="#">	Ido	</a></li>
+                    <li><a id="slselection" href="#">	Icelandic	</a></li>
+                    <li><a id="slselection" href="#">	Italian	</a></li>
+                    <li><a id="slselection" href="#">	Inuktitut	</a></li>
+                    <li><a id="slselection" href="#">	Japanese	</a></li>
+                    <li><a id="slselection" href="#">	Javanese	</a></li>
+                    <li><a id="slselection" href="#">	Kalaallisut, Greenlandic	</a></li>
+                    <li><a id="slselection" href="#">	Kannada	</a></li>
+                    <li><a id="slselection" href="#">	Kanuri	</a></li>
+                    <li><a id="slselection" href="#">	Kashmiri	</a></li>
+                    <li><a id="slselection" href="#">	Kazakh	</a></li>
+                    <li><a id="slselection" href="#">	Khmer	</a></li>
+                    <li><a id="slselection" href="#">	Kikuyu, Gikuyu	</a></li>
+                    <li><a id="slselection" href="#">	Kinyarwanda	</a></li>
+                    <li><a id="slselection" href="#">	Kyrgyz	</a></li>
+                    <li><a id="slselection" href="#">	Komi	</a></li>
+                    <li><a id="slselection" href="#">	Kongo	</a></li>
+                    <li><a id="slselection" href="#">	Korean	</a></li>
+                    <li><a id="slselection" href="#">	Kurdish	</a></li>
+                    <li><a id="slselection" href="#">	Kwanyama, Kuanyama	</a></li>
+                    <li><a id="slselection" href="#">	Latin	</a></li>
+                    <li><a id="slselection" href="#">	Luxembourgish, Letzeburgesch	</a></li>
+                    <li><a id="slselection" href="#">	Ganda	</a></li>
+                    <li><a id="slselection" href="#">	Limburgish, Limburgan, Limburger	</a></li>
+                    <li><a id="slselection" href="#">	Lingala	</a></li>
+                    <li><a id="slselection" href="#">	Lao	</a></li>
+                    <li><a id="slselection" href="#">	Lithuanian	</a></li>
+                    <li><a id="slselection" href="#">	Luba-Katanga	</a></li>
+                    <li><a id="slselection" href="#">	Latvian	</a></li>
+                    <li><a id="slselection" href="#">	Manx	</a></li>
+                    <li><a id="slselection" href="#">	Macedonian	</a></li>
+                    <li><a id="slselection" href="#">	Malagasy	</a></li>
+                    <li><a id="slselection" href="#">	Malay	</a></li>
+                    <li><a id="slselection" href="#">	Malayalam	</a></li>
+                    <li><a id="slselection" href="#">	Maltese	</a></li>
+                    <li><a id="slselection" href="#">	Māori	</a></li>
+                    <li><a id="slselection" href="#">	Marathi (Marāṭhī)	</a></li>
+                    <li><a id="slselection" href="#">	Marshallese	</a></li>
+                    <li><a id="slselection" href="#">	Mongolian	</a></li>
+                    <li><a id="slselection" href="#">	Nauru	</a></li>
+                    <li><a id="slselection" href="#">	Navajo, Navaho	</a></li>
+                    <li><a id="slselection" href="#">	Northern Ndebele	</a></li>
+                    <li><a id="slselection" href="#">	Nepali	</a></li>
+                    <li><a id="slselection" href="#">	Ndonga	</a></li>
+                    <li><a id="slselection" href="#">	Norwegian Bokmål	</a></li>
+                    <li><a id="slselection" href="#">	Norwegian Nynorsk	</a></li>
+                    <li><a id="slselection" href="#">	Norwegian	</a></li>
+                    <li><a id="slselection" href="#">	Nuosu	</a></li>
+                    <li><a id="slselection" href="#">	Southern Ndebele	</a></li>
+                    <li><a id="slselection" href="#">	Occitan	</a></li>
+                    <li><a id="slselection" href="#">	Ojibwe, Ojibwa	</a></li>
+                    <li><a id="slselection" href="#">	Old Church Slavonic, Church Slavonic, OldBulgarian	</a></li>
+                    <li><a id="slselection" href="#">	Oromo	</a></li>
+                    <li><a id="slselection" href="#">	Oriya	</a></li>
+                    <li><a id="slselection" href="#">	Ossetian, Ossetic	</a></li>
+                    <li><a id="slselection" href="#">	Panjabi, Punjabi	</a></li>
+                    <li><a id="slselection" href="#">	Pāli	</a></li>
+                    <li><a id="slselection" href="#">	Persian (Farsi)	</a></li>
+                    <li><a id="slselection" href="#">	Polish	</a></li>
+                    <li><a id="slselection" href="#">	Pashto, Pushto	</a></li>
+                    <li><a id="slselection" href="#">	Portuguese	</a></li>
+                    <li><a id="slselection" href="#">	Quechua	</a></li>
+                    <li><a id="slselection" href="#">	Romansh	</a></li>
+                    <li><a id="slselection" href="#">	Kirundi	</a></li>
+                    <li><a id="slselection" href="#">	Romanian	</a></li>
+                    <li><a id="slselection" href="#">	Russian	</a></li>
+                    <li><a id="slselection" href="#">	Sanskrit (Saṁskṛta)	</a></li>
+                    <li><a id="slselection" href="#">	Sardinian	</a></li>
+                    <li><a id="slselection" href="#">	Sindhi	</a></li>
+                    <li><a id="slselection" href="#">	Northern Sami	</a></li>
+                    <li><a id="slselection" href="#">	Samoan	</a></li>
+                    <li><a id="slselection" href="#">	Sango	</a></li>
+                    <li><a id="slselection" href="#">	Serbian	</a></li>
+                    <li><a id="slselection" href="#">	Scottish Gaelic, Gaelic	</a></li>
+                    <li><a id="slselection" href="#">	Shona	</a></li>
+                    <li><a id="slselection" href="#">	Sinhala, Sinhalese	</a></li>
+                    <li><a id="slselection" href="#">	Slovak	</a></li>
+                    <li><a id="slselection" href="#">	Slovene	</a></li>
+                    <li><a id="slselection" href="#">	Somali	</a></li>
+                    <li><a id="slselection" href="#">	Southern Sotho	</a></li>
+                    <li><a id="slselection" href="#">	Spanish, Castilian	</a></li>
+                    <li><a id="slselection" href="#">	Spanish, Latin	</a></li>
+                    <li><a id="slselection" href="#">	Sundanese	</a></li>
+                    <li><a id="slselection" href="#">	Swahili	</a></li>
+                    <li><a id="slselection" href="#">	Swati	</a></li>
+                    <li><a id="slselection" href="#">	Swedish	</a></li>
+                    <li><a id="slselection" href="#">	Tamil	</a></li>
+                    <li><a id="slselection" href="#">	Telugu	</a></li>
+                    <li><a id="slselection" href="#">	Tajik	</a></li>
+                    <li><a id="slselection" href="#">	Thai	</a></li>
+                    <li><a id="slselection" href="#">	Tigrinya	</a></li>
+                    <li><a id="slselection" href="#">	Tibetan Standard, Tibetan, Central	</a></li>
+                    <li><a id="slselection" href="#">	Turkmen	</a></li>
+                    <li><a id="slselection" href="#">	Tagalog	</a></li>
+                    <li><a id="slselection" href="#">	Tswana	</a></li>
+                    <li><a id="slselection" href="#">	Tonga (Tonga Islands)	</a></li>
+                    <li><a id="slselection" href="#">	Turkish	</a></li>
+                    <li><a id="slselection" href="#">	Tsonga	</a></li>
+                    <li><a id="slselection" href="#">	Tatar	</a></li>
+                    <li><a id="slselection" href="#">	Twi	</a></li>
+                    <li><a id="slselection" href="#">	Tahitian	</a></li>
+                    <li><a id="slselection" href="#">	Uyghur, Uighur	</a></li>
+                    <li><a id="slselection" href="#">	Ukrainian	</a></li>
+                    <li><a id="slselection" href="#">	Urdu	</a></li>
+                    <li><a id="slselection" href="#">	Uzbek	</a></li>
+                    <li><a id="slselection" href="#">	Venda	</a></li>
+                    <li><a id="slselection" href="#">	Vietnamese	</a></li>
+                    <li><a id="slselection" href="#">	Volapük	</a></li>
+                    <li><a id="slselection" href="#">	Walloon	</a></li>
+                    <li><a id="slselection" href="#">	Welsh	</a></li>
+                    <li><a id="slselection" href="#">	Wolof	</a></li>
+                    <li><a id="slselection" href="#">	Western Frisian	</a></li>
+                    <li><a id="slselection" href="#">	Xhosa	</a></li>
+                    <li><a id="slselection" href="#">	Yiddish	</a></li>
+                    <li><a id="slselection" href="#">	Yoruba	</a></li>
+                    <li><a id="slselection" href="#">	Zhuang, Chuang	</a></li>
+                    <li><a id="slselection" href="#">	Zulu	</a></li>
+
+                </ul>
+            </div>
+        </div>
 	</div><!-- /content -->
 
 
@@ -48,6 +268,46 @@
 		<h4>DSG UFAL MFF CUNI CZ 2014</h4>
 	</div><!-- /footer -->
 </div><!-- /page -->
+
+<div id="helppage" data-role="page">
+    <div data-role="header">
+        <a href="#mainpage" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">Main page</a>
+        <h1>Help</h1>
+	</div><!-- /header -->
+
+	<div data-role="main" class="ui-content">
+        <h3 class="ui-bar ui-bar-a ui-corner-all">How to start recording?</h3>
+        <div class="ui-body ui-body-a ui-corner-all">
+            <p>To start recording your own voice or any sound, press the "Push to speak" button. When enough voice
+                audio is recorded, pres the "Stop" button.
+            </p>
+        </div>
+    </div>
+
+	<div data-role="footer">
+		<h4>DSG UFAL MFF CUNI CZ 2014</h4>
+	</div><!-- /footer -->
+</div>
+
+<div id="aboutpage" data-role="page">
+    <div data-role="header">
+        <a href="#mainpage" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">Main page</a>
+        <h1>About the application</h1>
+	</div><!-- /header -->
+
+    <p>
+        This application was developed by:
+    </p>
+    <p>
+        Dialogue Systems Group <br>
+        Institute of Formal and Applied Linguistics (<a href="https://ufal.mff.cuni.cz/">UFAL</a>) <br>
+        Charles University in Prague, Czech Republic <br>
+        Faculty of Mathematics and Physics <br>
+    </p>
+	<div data-role="footer">
+		<h4>DSG UFAL MFF CUNI CZ 2014</h4>
+	</div><!-- /footer -->
+</div>
 
 </body>
 </html>

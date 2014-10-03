@@ -11,9 +11,15 @@ $(document).ready(function(){
     $( "#stop" ).hide();
     $( "#yes" ).attr("disabled", "disabled");
     $( "#no" ).attr("disabled", "disabled");
+    $( "#whatsound" ).hide();
+    $( "#warning" ).hide();
 
     var socket = createSocket();
     var recorder = createRecorder();
+});
+
+$( document ).on( "click", "#warning", function() {
+    $( "#warning" ).hide();
 });
 
 $( document ).on( "click", ".show-page-loading-msg", function() {
@@ -32,10 +38,40 @@ $( document ).on( "click", ".show-page-loading-msg", function() {
     });
     $( "#push" ).hide();
     $( "#stop" ).show();
+
+    $( "#yes" ).attr("disabled", "disabled");
+    $( "#no" ).attr("disabled", "disabled");
+
     startRecorder();
 });
 
 $( document ).on( "click", ".hide-page-loading-msg", function() {
+    stopRecorderAll();
+});
+
+$( document ).on( "click", "#yes", function() {
+    $( "#yes" ).attr("disabled", "disabled");
+    $( "#no" ).attr("disabled", "disabled");
+
+    $.post( "/feedback/"+recorder.sessionname_get()+"/yes" + "/"+$( "#language" ).text() );
+});
+
+$( document ).on( "click", "#no", function() {
+    $( "#yes" ).attr("disabled", "disabled");
+    $( "#no" ).attr("disabled", "disabled");
+    $( "#whatsound" ).show();
+
+    $.post( "/feedback/"+recorder.sessionname_get()+"/no" + "/"+$( "#language" ).text() );
+});
+
+$( document ).on( "click", "#slselection", function() {
+    $( "#whatsound" ).hide();
+    $( "#soundtype" ).val("");
+
+    $.post( "/feedback/"+recorder.sessionname_get()+"/yes" + "/"+$( this ).text() );
+});
+
+function stopRecorderAll() {
     $.mobile.loading( "hide" );
     $( "#push" ).show();
     $( "#stop" ).hide();
@@ -44,27 +80,9 @@ $( document ).on( "click", ".hide-page-loading-msg", function() {
     $( "#no" ).removeAttr("disabled");
 
     stopRecorder();
-});
+}
 
-$( document ).on( "click", "#yes", function() {
-    $( "#yes" ).attr("disabled", "disabled");
-    $( "#no" ).attr("disabled", "disabled");
-
-    $.post( "/feedback/"+recorder.sessionname_get()+"/yes" + "/"+$( "#language" ).text() );
-
-    //$( "#language").text("None");
-});
-
-$( document ).on( "click", "#no", function() {
-    $( "#yes" ).attr("disabled", "disabled");
-    $( "#no" ).attr("disabled", "disabled");
-
-    $.post( "/feedback/"+recorder.sessionname_get()+"/no" + "/"+$( "#language" ).text() );
-
-    //$( "#language").text("None");
-});
-
-function center(content){
+function center(content) {
 	var content = $( content );
     var container = content.parent();
 	content.css("left", (container.width()-content.outerWidth())/2);
@@ -78,18 +96,24 @@ function createSocket() {
         console.log("Socket connected");
     });
 
-    socket.on("result", function(r) {
-        console.log(r);
-        $( "#language" ).text(r['language']);
-    });
-
     socket.on("sessionname", function(r) {
         console.log(r["sessionname"]);
         recorder.sessionname(r["sessionname"]);
     });
 
+    socket.on("result", function(r) {
+        console.log(r);
+        $( "#language" ).text(r['language']);
+    });
+
+    socket.on("stop", function(r) {
+        console.log(r);
+        stopRecorderAll();
+    });
+
     socket.on("error", function(error) {
-        console.log(error);
+        $( "#warning-content" ).text(error);
+        $( "#warning" ).show()
     });
 
     socket.on("end", function() {

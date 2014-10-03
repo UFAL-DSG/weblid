@@ -2,7 +2,7 @@
 
     var Recorder = function(cfg){
         var config = cfg || {};
-        var bufferLen = config.bufferLen || 4096;
+        var bufferLen = config.bufferLen || 2048;
         var numChannels = config.numChannels || 1;
         var sampleRate = 0;
 
@@ -10,10 +10,12 @@
         var recording = false;
         var sessionname = "none"
 
+
         this.init = function() {
             audio_context = createAudioContext();
             navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
-                console.log('No live audio input: ' + e);
+                $( "#warning-content" ).text('No live audio input: ' + e);
+                $( "#warning" ).show()
             });
         }
 
@@ -61,7 +63,8 @@
 
                 return audio_context;
             } catch (e) {
-                alert('No web audio support in this browser!');
+                $( "#warning-content" ).text('This browser does not support microphone access.');
+                $( "#warning" ).show()
             }
         }
 
