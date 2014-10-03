@@ -13,6 +13,8 @@ $(document).ready(function(){
     $( "#no" ).attr("disabled", "disabled");
     $( "#whatsound" ).hide();
     $( "#warning" ).hide();
+    $( "#play-recording").hide();
+
 
     var socket = createSocket();
     var recorder = createRecorder();
@@ -38,6 +40,7 @@ $( document ).on( "click", ".show-page-loading-msg", function() {
     });
     $( "#push" ).hide();
     $( "#stop" ).show();
+    $( "#play-recording").hide();
 
     $( "#yes" ).attr("disabled", "disabled");
     $( "#no" ).attr("disabled", "disabled");
@@ -75,6 +78,9 @@ function stopRecorderAll() {
     $.mobile.loading( "hide" );
     $( "#push" ).show();
     $( "#stop" ).hide();
+
+    $( "#play-recording").show();
+    $( "#play-recording").attr('src','/data/'+recorder.sessionname_get());
 
     $( "#yes" ).removeAttr("disabled");
     $( "#no" ).removeAttr("disabled");

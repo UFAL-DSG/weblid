@@ -5,7 +5,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
 
@@ -50,6 +49,9 @@
         <h3 class="ui-bar ui-bar-a ui-corner-all">Detected sound or language</h3>
         <div class="ui-body ui-body-a ui-corner-all">
             <p id="language">None</p>
+            <audio id="play-recording" src="data" type="audio/wav" controls>
+                Your browser does not support the audio element.
+            </audio>
         </div>
 
         <h3 class="ui-bar ui-bar-a ui-corner-all">Did I get that right?</h3>
@@ -303,12 +305,13 @@
             <p>
                 Dialogue Systems Group <br>
                 Institute of Formal and Applied Linguistics (<a href="https://ufal.mff.cuni.cz/">UFAL</a>) <br>
-                Charles University in Prague, Czech Republic <br>
                 Faculty of Mathematics and Physics <br>
+                Charles University in Prague <br>
+                Czech Republic <br>
             </p>
         </div>
     </div>
-    
+
 	<div data-role="footer">
 		<h4>DSG UFAL MFF CUNI CZ 2014</h4>
 	</div><!-- /footer -->

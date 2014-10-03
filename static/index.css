@@ -25,3 +25,8 @@
   -webkit-border-bottom-right-radius: inherit;
   border-bottom-right-radius: inherit;
 }
+
+audio {
+    width: 100%;
+    display: block;
+}

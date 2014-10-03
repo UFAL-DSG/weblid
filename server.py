@@ -6,7 +6,7 @@ import os.path
 import time
 import codecs
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, send_from_directory
 from flask.ext.socketio import SocketIO, emit, session
 from datetime import datetime
 
@@ -33,6 +33,11 @@ def get_file_name():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/data/<fn>')
+def data(fn):
+    print fn
+    return send_from_directory('./data', fn, as_attachment=True)
 
 @app.route('/feedback/<sessionname>/<feedback>/<language>', methods=['GET', 'POST'])
 def feedback(sessionname, feedback, language):
