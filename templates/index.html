@@ -10,6 +10,7 @@
 
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <!--<script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>-->
     <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
     <script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
@@ -49,7 +50,7 @@
         <h3 class="ui-bar ui-bar-a ui-corner-all">Detected sound or language</h3>
         <div class="ui-body ui-body-a ui-corner-all">
             <p id="language">None</p>
-            <audio id="play-recording" src="data" type="audio/wav" controls>
+            <audio id="play-recording" src="" type="audio/wav" controls>
                 Your browser does not support the audio element.
             </audio>
         </div>

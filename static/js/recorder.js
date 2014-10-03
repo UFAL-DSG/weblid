@@ -1,3 +1,6 @@
+var source;
+var sourceProcessor;
+
 (function(window){
 
     var Recorder = function(cfg){
@@ -8,6 +11,7 @@
 
         var bufferCallback = config.bufferCallback || function(buffer) { console.log(buffer); };
         var recording = false;
+        var first_recording = false;
         var sessionname = "none"
 
 
@@ -69,13 +73,20 @@
         }
 
         function startUserMedia(stream) {
-            var input = audio_context.createMediaStreamSource(stream);
+            source = audio_context.createMediaStreamSource(stream);
             console.log('Media stream created.');
 
-            var node = input.context.createScriptProcessor(bufferLen, numChannels, 1);
-            sampleRate = input.context.sampleRate;
+            sourceProcessor = source.context.createScriptProcessor(bufferLen, numChannels, 1);
+            sampleRate = source.context.sampleRate;
 
-            node.onaudioprocess = function(e){
+            sourceProcessor.onaudioprocess = function(e){
+                //console.log('onaudioprocess');
+                if (!first_recording) {
+                    console.log('onaudioprocess: first recording');
+                    $( "#push" ).removeAttr("disabled");
+                    first_recording = true;
+                }
+
                 if (!recording) return;
                 var buffer = e.inputBuffer.getChannelData(0);
 
@@ -87,14 +98,14 @@
                     }
                 }
                 else {
-                    buffer_down = buffer
+                    buffer_down = buffer;
                 }
 
                 bufferCallback(buffer_down);
             }
 
-            input.connect(node);
-            node.connect(input.context.destination);
+            source.connect(sourceProcessor);
+            sourceProcessor.connect(source.context.destination);
         }
 
     };

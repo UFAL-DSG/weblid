@@ -1,3 +1,9 @@
+var recorder;
+var socket;
+
+createSocket();
+createRecorder();
+
 $(window).resize(function(){
     center("#push");
     center("#stop");
@@ -8,16 +14,13 @@ $(document).ready(function(){
     center("#push");
     center("#stop");
     /* your other page load code here*/
+    $( "#push" ).attr("disabled", "disabled");
     $( "#stop" ).hide();
     $( "#yes" ).attr("disabled", "disabled");
     $( "#no" ).attr("disabled", "disabled");
     $( "#whatsound" ).hide();
     $( "#warning" ).hide();
     $( "#play-recording").hide();
-
-
-    var socket = createSocket();
-    var recorder = createRecorder();
 });
 
 $( document ).on( "click", "#warning", function() {
@@ -122,11 +125,13 @@ function createSocket() {
         $( "#warning" ).show()
     });
 
-    socket.on("end", function() {
-        console.log("Socket end");
+    socket.on("disconnect", function() {
+        console.log("Web socket disconnected.");
+/*
+        $( "#warning-content" ).text("Web socket disconnected.");
+        $( "#warning" ).show()
+*/
     });
-
-    return socket;
 }
 
 function createRecorder() {
@@ -140,6 +145,8 @@ function createRecorder() {
 
 function startRecorder() {
     socket.emit('start', {sample_rate: recorder.sample_rate()});
+    $( "#language" ).text("None");
+
     recorder.record();
 }
 

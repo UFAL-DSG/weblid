@@ -79,7 +79,7 @@ def chunk(message):
 
         emit('result', {'language': 'Silence'})
 
-        if session['received_samples'] > 6*session['sample_rate']:
+        if session['received_samples'] > 15*session['sample_rate']:
             emit('stop', {})
 
 @socketio.on('stop')
