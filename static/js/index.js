@@ -1,8 +1,25 @@
 var recorder;
 var socket;
+var position;
 
 createSocket();
 createRecorder();
+
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(geoSuccess,geoError);
+
+    function geoSuccess(p)
+    {
+        position = p;
+    }
+    function geoError(position)
+    {
+        console.log("No geoposition");
+    }
+}
+else {
+    console.log("No geolocation");
+}
 
 $(window).resize(function(){
     center("#push");
@@ -48,6 +65,8 @@ $( document ).on( "click", ".show-page-loading-msg", function() {
     $( "#yes" ).attr("disabled", "disabled");
     $( "#no" ).attr("disabled", "disabled");
 
+    $( "#whatsound" ).hide();
+
     startRecorder();
 });
 
@@ -66,6 +85,8 @@ $( document ).on( "click", "#no", function() {
     $( "#yes" ).attr("disabled", "disabled");
     $( "#no" ).attr("disabled", "disabled");
     $( "#whatsound" ).show();
+
+    $('html,body').animate({scrollTop: $( "#whatsound" ).offset().top});
 
     $.post( "/feedback/"+recorder.sessionname_get()+"/no" + "/"+$( "#language" ).text() );
 });
@@ -89,6 +110,8 @@ function stopRecorderAll() {
     $( "#no" ).removeAttr("disabled");
 
     stopRecorder();
+
+    $.post( "/geolocation/"+recorder.sessionname_get()+"/" + position.coords.latitude + "/"+position.coords.longitude);
 }
 
 function center(content) {

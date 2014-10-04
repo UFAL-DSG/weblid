@@ -22,6 +22,7 @@
     <div id="menupanel" data-role="panel" data-display="overlay">
         <ul data-role="listview">
             <!--<li><a id="points" href="#mainpage" class="ui-btn">Your points</a></li>-->
+            <li><a id="privacy" href="#privacypage" class="ui-btn">Terms of service & Privacy</a></li>
             <li><a id="help" href="#helppage" class="ui-btn">Help</a></li>
             <li><a id="about" href="#aboutpage" class="ui-btn">About</a></li>
             <li><a data-rel="close" class="ui-btn">Close panel</a></li>
@@ -272,51 +273,11 @@
 	</div><!-- /footer -->
 </div><!-- /page -->
 
-<div id="helppage" data-role="page">
-    <div data-role="header">
-        <a href="#mainpage" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">Main page</a>
-        <h1>Help</h1>
-	</div><!-- /header -->
+{% include 'privacypage.html' %}
 
-	<div data-role="main" class="ui-content">
-        <h3 class="ui-bar ui-bar-a ui-corner-all">How to start recording?</h3>
-        <div class="ui-body ui-body-a ui-corner-all">
-            <p>To start recording your own voice or any sound, press the "Push to speak" button. When enough voice
-                audio is recorded, pres the "Stop" button.
-            </p>
-        </div>
-    </div>
+{% include 'helppage.html' %}
 
-	<div data-role="footer">
-		<h4>DSG UFAL MFF CUNI CZ 2014</h4>
-	</div><!-- /footer -->
-</div>
-
-<div id="aboutpage" data-role="page">
-    <div data-role="header">
-        <a href="#mainpage" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">Main page</a>
-        <h1>About the application</h1>
-	</div><!-- /header -->
-
-    <div data-role="main" class="ui-content">
-        <div class="ui-body ui-body-a ui-corner-all">
-            <p>
-                This application was developed by:
-            </p>
-            <p>
-                Dialogue Systems Group <br>
-                Institute of Formal and Applied Linguistics (<a href="https://ufal.mff.cuni.cz/">UFAL</a>) <br>
-                Faculty of Mathematics and Physics <br>
-                Charles University in Prague <br>
-                Czech Republic <br>
-            </p>
-        </div>
-    </div>
-
-	<div data-role="footer">
-		<h4>DSG UFAL MFF CUNI CZ 2014</h4>
-	</div><!-- /footer -->
-</div>
+{% include 'aboutpage.html' %}
 
 </body>
 </html>

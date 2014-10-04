@@ -42,11 +42,23 @@ def data(fn):
 @app.route('/feedback/<sessionname>/<feedback>/<language>', methods=['GET', 'POST'])
 def feedback(sessionname, feedback, language):
     print "Feedback", sessionname, feedback, language
-    print sessionname+".feedback"
+
     with codecs.open("./data/"+sessionname+".feedback", "a+", encoding="utf8") as f:
         f.write(feedback)
         f.write("\n")
         f.write(language)
+        f.write("\n")
+
+    return "received"
+
+@app.route('/geolocation/<sessionname>/<latitude>/<longitude>', methods=['GET', 'POST'])
+def geolocation(sessionname, latitude, longitude):
+    print "Geolocation", sessionname, latitude, longitude
+
+    with codecs.open("./data/"+sessionname+".geolocation", "a+", encoding="utf8") as f:
+        f.write(str(latitude))
+        f.write("\n")
+        f.write(str(longitude))
         f.write("\n")
 
     return "received"
