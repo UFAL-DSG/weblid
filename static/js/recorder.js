@@ -16,11 +16,7 @@ var sourceProcessor;
 
 
         this.init = function() {
-            audio_context = createAudioContext();
-            navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
-                $( "#warning-content" ).text('No live audio input: ' + e);
-                $( "#warning" ).show()
-            });
+            createAudioContext();
         }
 
         this.configure = function(cfg){
@@ -62,13 +58,17 @@ var sourceProcessor;
                 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
 
                 audio_context = new AudioContext;
-                console.log('Audio context set up.');
-                console.log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
+                navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+                    $( "#warning-content" ).text('This browser does not support microphone access: ' + e);
+                    $( "#warning" ).show();
+                });
+
+                console.log('Audio is ready.');
 
                 return audio_context;
             } catch (e) {
-                $( "#warning-content" ).text('This browser does not support microphone access.');
-                $( "#warning" ).show()
+                $( "#warning-content" ).text('This browser does not support microphone access: ' + e);
+                $( "#warning" ).show();
             }
         }
 

@@ -6,22 +6,18 @@ createSocket();
 createRecorder();
 
 if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(geoSuccess,geoError);
-
-    function geoSuccess(p)
-    {
+    navigator.geolocation.getCurrentPosition(function(p) {
         position = p;
     }
-    function geoError(position)
-    {
+    ,function(p) {
         console.log("No geoposition");
-    }
+    });
 }
 else {
     console.log("No geolocation");
 }
 
-$(window).resize(function(){
+$(window).resize(function() {
     center("#push");
     center("#stop");
 });
@@ -36,8 +32,14 @@ $(document).ready(function(){
     $( "#yes" ).attr("disabled", "disabled");
     $( "#no" ).attr("disabled", "disabled");
     $( "#whatsound" ).hide();
-    $( "#warning" ).hide();
     $( "#play-recording").hide();
+
+
+    is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+
+    if (is_chrome) {
+        $( "#warning" ).hide();
+    }
 });
 
 $( document ).on( "click", "#warning", function() {
